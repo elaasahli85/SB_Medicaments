@@ -23,19 +23,4 @@ public class GlobalExceptionHandler {
         // Return a ResponseEntity containing the custom response body and HTTP status
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
-
-    // Define the ApiError class or use an existing one
-    static class ApiError {
-        private HttpStatus status;
-        private String message;
-        private String details;
-
-        public ApiError(HttpStatus status, String message, String details) {
-            this.status = status;
-            this.message = message;
-            this.details = details;
-        }
-
-        // Getters and setters
-    }
 }
