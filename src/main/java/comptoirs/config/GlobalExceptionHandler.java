@@ -1,5 +1,6 @@
 package comptoirs.config;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,4 +24,21 @@ public class GlobalExceptionHandler {
         // Return a ResponseEntity containing the custom response body and HTTP status
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        // Attempt to get more specific cause of the exception
+        Throwable rootCause = ex.getMostSpecificCause();
+        String specificMessage = rootCause != null ? rootCause.getMessage() : ex.getMessage();
+
+        // Construct a custom response body with the detailed message
+        ApiError apiError = new ApiError(
+                HttpStatus.CONFLICT,
+                "Data integrity violation " + specificMessage,
+                "The operation could not be completed due to a data integrity violation: " + specificMessage);
+
+        // Return a ResponseEntity containing the custom response body and HTTP status
+        return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
+    }
+
 }
