@@ -27,7 +27,7 @@ public class SpringDataRestConfig
                 .map(Type::getJavaType)
                 .toArray(Class[]::new)
         );
-
+/*
     // Autorise les requêtes CORS
     cors.addMapping("/api/**") // Toutes les mappings sont autorisées
         .allowedOrigins("*") // Toutes les origines sont autorisées
@@ -35,4 +35,5 @@ public class SpringDataRestConfig
         .allowCredentials(false) // Pas de cookies
         .maxAge(3600); // Durée de la réponse en secondes
   }
+ */
 }

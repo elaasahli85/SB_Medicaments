@@ -19,7 +19,7 @@ public class WebApp {
 		return new ModelMapper();
 	}
 
-	@Bean
+//	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
