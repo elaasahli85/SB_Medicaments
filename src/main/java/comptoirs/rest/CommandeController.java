@@ -29,33 +29,39 @@ public class CommandeController {
 
 	@PostMapping("ajouterPour/{clientCode}")
 	public CommandeDTO ajouter(@PathVariable @NonNull String clientCode) {
-        log.info("ajouterPour {}", clientCode);
+        log.info("Contrôleur : ajouter commande pour {}", clientCode);
 		Commande commande = commandeService.creerCommande(clientCode);
 		return mapper.map(commande, CommandeDTO.class);
 	}
 
 	@PostMapping("expedier/{commandeNum}")
 	public EnTeteCommandeDTO expedier(@PathVariable Integer commandeNum) {
-        log.info("expedier {}", commandeNum);
+        log.info("Contrôleur : expédier la commande {}", commandeNum);
 		return mapper.map(commandeService.enregistreExpedition(commandeNum), EnTeteCommandeDTO.class);
 	}
 
 	@PostMapping("ajouterLigne")
 	public LigneDTO ajouterLigne(@RequestParam int commandeNum, @RequestParam int produitRef, @RequestParam int quantite) {
-        log.info("ajouterLigne {} {} {}", commandeNum, produitRef, quantite);
+        log.info("Contrôleur : ajouterLigne {} {} {}", commandeNum, produitRef, quantite);
 		var ligne = commandeService.ajouterLigne(commandeNum, produitRef, quantite);
 		return mapper.map(ligne, LigneDTO.class);
 	}
 
+    @DeleteMapping("supprimerLigne/{idLigne}")
+    public void supprimerLigne(@PathVariable Integer idLigne) {
+        log.info("Contrôleur : supprimerLigne {}", idLigne);
+        commandeService.supprimerLigne(idLigne);
+    }
+
     @GetMapping("{commandeNum}")
     public CommandeDTO getCommande(@PathVariable Integer commandeNum) {
-        log.info("getCommande {}", commandeNum);
+        log.info("Contrôleur : getCommande {}", commandeNum);
         return mapper.map(commandeService.getCommande(commandeNum), CommandeDTO.class);
     }
 
     @GetMapping("enCoursPour/{clientCode}")
     public List<EnTeteCommandeDTO> getCommandeEnCoursPour(@PathVariable @NonNull String clientCode) {
-        log.info("getCommandeEnCoursPour {}", clientCode);
+        log.info("Contrôleur : getCommandeEnCoursPour {}", clientCode);
         List<Commande> commandes = commandeService.getCommandeEnCoursPour(clientCode);
         List<EnTeteCommandeDTO> commandesDTO = new ArrayList<>();
         for (Commande commande : commandes) {
