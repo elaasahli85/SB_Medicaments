@@ -25,7 +25,7 @@ public interface ProduitRepository extends JpaRepository<Produit, Integer> {
         WHERE c.code = :codeCategorie
         GROUP BY p.nom
     """)
-    List<UnitesParProduit> produitsVendusPour(Integer codeCategorie);
+    List<UnitesParProduit> produitsCommandesPour(Integer codeCategorie);
 
     /**
      * Calcule le nombre d'unités vendues pour chaque produit d'une catégorie donnée.
@@ -43,7 +43,7 @@ public interface ProduitRepository extends JpaRepository<Produit, Integer> {
         WHERE c.code = :codeCategorie
         GROUP BY p.nom
     """)
-    List<Object> produitsVendusPourV2(Integer codeCategorie);
+    List<Object> produitsCommandesPourV2(Integer codeCategorie);
 
     @Query("""
        SELECT p from Produit p

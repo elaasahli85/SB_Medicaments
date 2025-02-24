@@ -24,30 +24,24 @@ public class StatisticsRestController {
 	 * Unites vendues pour chaque produit d'une catégorie donnée.
 	 *
 	 * @param code le code de la catégorie à traiter
-	 * @return le nombre d'unités vendus pour chaque produit en format JSON
+	 * @return le nombre d'unités commandées pour chaque produit en format JSON
 	 */
-	@GetMapping(path = "unitesVenduesPourCategorie/{code}",
+	@GetMapping(path = "unitesCommandeesPourCategorie/{code}",
 		produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public List<UnitesParProduit> unitesVenduesPourCategorie(@PathVariable final Integer code) {
-		return dao.produitsVendusPour(code);
+	public List<UnitesParProduit> unitesCommandeesPourCategorie(@PathVariable final Integer code) {
+		return dao.produitsCommandesPour(code);
 	}
 
 	/**
 	 * Unites vendues pour chaque produit d'une catégorie donnée. Pas d'utilisation
 	 * de DTO, renvoie simplement une liste de tableaux de valeurs
-	 *
+	 * Plus patique à utiliser pour Google Charts
 	 * @param code le code de la catégorie à traiter
-	 * @return le nombre d'unités vendus pour chaque produit en format JSON
+	 * @return le nombre d'unités commandées pour chaque produit en format JSON
 	 */
-	@GetMapping(path = "unitesVenduesPourCategorieV2/{code}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public List<Object> unitesVenduesPourCategorieV2(@PathVariable final Integer code) {
-		return dao.produitsVendusPourV2(code);
-	}
-
-	@PostMapping(path = "unitesVenduesPourCategorie/{code}",
-		produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public List<UnitesParProduit> unitesVenduesPourCategorieV3(@PathVariable final Integer code) {
-		return dao.produitsVendusPour(code);
+	@GetMapping(path = "unitesCommandeesPourCategorieV2/{code}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public List<Object> unitesCommandeesPourCategorieV2(@PathVariable final Integer code) {
+		return dao.produitsCommandesPourV2(code);
 	}
 
 }
