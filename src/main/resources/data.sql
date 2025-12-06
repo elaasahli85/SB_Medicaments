@@ -169,7 +169,7 @@ INSERT INTO COMMANDE (NUMERO, SAISIELE, ENVOYEELE, DISPENSAIRE_CODE, PORT, REMIS
 (6, '2024-03-10', '2024-03-13', 'DSP06', 10.00, 5.50, 'Dispensaire Rufisque', '34 Avenue Blaise Diagne', '11000', 'Rufisque', 'Dakar', 'Sénégal'),
 (7, '2024-03-20', NULL, 'DSP07', 22.00, 4.50, 'Dispensaire Louga', '67 Rue Abdoulaye Wade', '50000', 'Louga', 'Louga', 'Sénégal'),
 (8, '2024-04-05', '2024-04-08', 'DSP08', 30.00, 7.00, 'Dispensaire Tambacounda', '23 Avenue Demba Diop', '23000', 'Tambacounda', 'Tambacounda', 'Sénégal');
-ALTER TABLE Commande ALTER COLUMN code RESTART WITH 9;
+ALTER TABLE Commande ALTER COLUMN numero RESTART WITH 9;
 
 -- Insertion des lignes de commande
 INSERT INTO LIGNE (COMMANDE_NUMERO, MEDICAMENT_REFERENCE, QUANTITE) VALUES
