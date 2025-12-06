@@ -27,7 +27,7 @@
 
         // Fait un appel AJAX pour récupérer les données à afficher
         function doAjax(categorieSelectionnee) {
-            fetch("/services/stats/unitesVenduesPourCategorieV2/" + categorieSelectionnee.value)
+            fetch("/api/stats/unitesCommandeesPourCategorieV2/" + categorieSelectionnee.value)
                 .then(response => response.json())
                 .then(drawPiechart)
                 .catch(showError);
@@ -37,13 +37,13 @@
         function drawPiechart(result) {
             // On met le résultat au format attendu par google
             // En-têtes des colonnes
-            const headers = ['Produit', 'Unités vendues'];
+            const headers = ['Produit', 'Unités commandées'];
             // cf. https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/unshift
             result.unshift(headers);
 
             const dataTable = google.visualization.arrayToDataTable(result);
             const chart = new google.visualization.PieChart(document.getElementById('piechart'));
-            const options = { title: 'Unités vendues par produit' };
+            const options = { title: 'Unités commandées par produit' };
             chart.draw(dataTable, options);
         }
 
@@ -89,7 +89,7 @@
             <form id="formulaireCategorie">
                 <!--/* On choisit le code de la catégorie sur laquelle doit porter la statistique */-->
                 <!--/* Chaque fois qu'on choisit un code, on fait l'appel AJAX */-->
-                <label for='code'>Choisissez la catégorie</label><br>
+                <label for='code'>Catégorie de médicament</label><br>
                 <select class="selectpicker" data-style="btn-primary" id='code' name='code' onchange='doAjax(this)'>
                     <!--/* Une option pour chaque catégorie c dans la liste 'categories' transmise par le contrôleur */-->
                     <option th:each="c: ${categories}" th:value='${c.code}' value="1" th:text="${c.libelle}">
@@ -99,7 +99,7 @@
                 <!--/* Pas de 'submit', on fait un appel AJAX */-->
             </form>
             <br />
-            <a th:href="@{/services/stats/unitesVenduesPourCategorieV2/1}" target="_blank" href="#">Résultats fournis
+            <a th:href="@{/api/stats/unitesCommandeesPourCategorieV2/1}" target="_blank" href="#">Résultats fournis
                 par
                 l'appel AJAX</a>
             <!-- Le graphique apparaît ici -->

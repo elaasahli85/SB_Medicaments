@@ -1,51 +1,98 @@
-# Spring Boot Application - Les Comptoirs
+# Spring Boot Application - Gestion Pharmaceutique
 
 ## Description
-Ce projet est une application Spring Boot permettant la gestion des produits ainsi que des statistiques de vente. Elle utilise des entités JPA pour interagir avec une base de données, des services REST exposés via des contrôleurs, et des dépôts pour accéder aux données.
+Ce projet est une application Spring Boot permettant la gestion des médicaments et des commandes pour des dispensaires. Elle utilise des entités JPA pour interagir avec une base de données, des services REST exposés via des contrôleurs, et des dépôts pour accéder aux données.
 
 ## Fonctionnalités
-- Gestion des produits, clients, commandes...
-- Suivi des statistiques de ventes par catégorie.
+- Gestion des médicaments, dispensaires, commandes et catégories de médicaments.
+- Suivi des statistiques de commandes par catégorie de médicaments.
 - Exposition des données via des services REST en JSON et XML.
 - Utilisation de Spring Data JPA pour accéder et manipuler les données.
+- Images de médicaments avec URLs provenant d'Unsplash.
 
 ## Technologies Utilisées
-- **Java**
-- **Spring Boot**
-- **Spring Data JPA**
-- **Lombok**
+- **Java 21 LTS**
+- **Spring Boot 3.5.3**
+- **Spring Data JPA** avec Hibernate 6.6.18
+- **Jakarta EE** (Jakarta Persistence API 3.1.0)
+- **Lombok 1.18.42**
+- **SpringDoc OpenAPI 2.7.0** pour la documentation API
+- **H2 Database 2.3.232** (développement)
+- **PostgreSQL 42.7.7** (production)
 
 ## Structure du Code
 ### Couche "Accès aux données"
 #### Entités
 Les entités représentent les tables de base de données et leur mapping avec JPA.
 
-- ex:  [Produit](src/main/java/comptoirs/entity/Produit.java): Représente les produits.
+- [Medicament](src/main/java/comptoirs/entity/Medicament.java): Représente les médicaments avec leurs informations (nom, prix, stock, image URL).
+- [Dispensaire](src/main/java/comptoirs/entity/Dispensaire.java): Représente les établissements de santé qui passent commande.
+- [Commande](src/main/java/comptoirs/entity/Commande.java): Représente les commandes de médicaments.
+- [Ligne](src/main/java/comptoirs/entity/Ligne.java): Représente les lignes de commande (médicament + quantité).
+- [Categorie](src/main/java/comptoirs/entity/Categorie.java): Représente les catégories de médicaments.
 
 #### Dépôts (Repositories)
 Les dépôts gèrent l'accès aux entités via Spring Data JPA.
 
-- ex : [ProduitRepository](src/main/java/comptoirs/dao/ProduitRepository.java): Interface gérant les requêtes sur les entités `Produit`.
+- [MedicamentRepository](src/main/java/comptoirs/dao/MedicamentRepository.java): Interface gérant les requêtes sur les entités `Medicament`.
+- [DispensaireRepository](src/main/java/comptoirs/dao/DispensaireRepository.java): Interface gérant les requêtes sur les entités `Dispensaire`.
+- [CommandeRepository](src/main/java/comptoirs/dao/CommandeRepository.java): Interface gérant les requêtes sur les entités `Commande`.
+- [LigneRepository](src/main/java/comptoirs/dao/LigneRepository.java): Interface gérant les requêtes sur les entités `Ligne`.
 
 ### Couche "Services métier"
 
 Cette couche définit les services métier transactionnels qui utilisent la couche "Accès aux données" pour effectuer des opérations complexes.
 
-- ex : [CommandeService](src/main/java/comptoirs/service/CommandeService.java): Gère les bons de commandes en assurant le respects des règles métier.
+- [CommandeService](src/main/java/comptoirs/service/CommandeService.java): Gère les commandes de médicaments en assurant le respect des règles métier (vérification des stocks, calcul des totaux, gestion des dispensaires).
 
 
 ### Couche "Web"
 #### Contrôleurs REST
 Les contrôleurs exposent les points d'entrée REST pour interagir avec l'application.
 
-- [CommandeController](src/main/java/comptoirs/rest/CommandeController.java): fournit une API web permettant l'accès au service métier [CommandeService](src/main/java/comptoirs/service/CommandeService.java).
+- [CommandeController](src/main/java/comptoirs/rest/CommandeController.java): Fournit une API web permettant l'accès au service métier [CommandeService](src/main/java/comptoirs/service/CommandeService.java).
+- [StatisticsRestController](src/main/java/comptoirs/rest/StatisticsRestController.java): Fournit des statistiques sur les médicaments par catégorie.
+- [SimpleRestController](src/main/java/comptoirs/rest/SimpleRestController.java): Fournit des endpoints simples pour interroger les catégories, médicaments et dispensaires.
+
+#### Contrôleurs MVC
+- [StatsMVCController](src/main/java/comptoirs/mvc/StatsMVCController.java): Fournit des vues HTML avec Thymeleaf pour les statistiques.
+
+#### Documentation API
+L'application expose sa documentation OpenAPI/Swagger à l'adresse : `http://localhost:8989/swagger-ui.html`
+
+## Démarrage de l'application
+
+### Prérequis
+- Java 21 LTS installé
+- Maven 3.6+
+
+### Lancer l'application
+```bash
+mvn spring-boot:run
+```
+
+L'application démarre sur le port **8989** : `http://localhost:8989`
+
+### Accéder à la documentation API
+Une fois l'application démarrée, accédez à Swagger UI :
+```
+http://localhost:8989/swagger-ui.html
+```
+
+### Données de test
+L'application charge automatiquement des données de test au démarrage :
+- **10 catégories** de médicaments (Antalgiques, Anti-inflammatoires, Antibiotiques, etc.)
+- **100 médicaments** (10 par catégorie) avec URLs d'images Unsplash
+- **10 dispensaires** situés au Sénégal (Dakar, Saint-Louis, Thiès, etc.)
+- **8 commandes** avec lignes de commande
 
 ## Documentation
-Consultez la documentation officielle pour mieux comprendre les technologies utilisées dans ce projet :
+Consultez la documentation officielle pour mieux comprendre les technologies utilisées dans ce projet :
 
-- **[Spring Boot Maven Plugin](https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/maven-plugin/)**: Guide sur l'utilisation des plugins Maven pour Spring Boot.
-- **[Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/htmlsingle/#boot-features-jpa-and-spring-data)**: Documentation sur l'intégration de JPA avec Spring Boot.
-- **[Spring Web](https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications)**: Développement et exposition d'API avec Spring Web.
+- **[Spring Boot 3.x Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/)**: Documentation complète de Spring Boot.
+- **[Spring Data JPA](https://docs.spring.io/spring-data/jpa/reference/)**: Documentation sur l'intégration de JPA avec Spring.
+- **[Jakarta Persistence](https://jakarta.ee/specifications/persistence/3.1/)**: Spécification Jakarta Persistence API 3.1.
+- **[SpringDoc OpenAPI](https://springdoc.org/)**: Documentation pour SpringDoc OpenAPI.
 
 ## Guides Utiles
 Voici des tutoriels pour démarrer avec les technologies Spring utilisées dans ce projet :
