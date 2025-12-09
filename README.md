@@ -53,7 +53,7 @@ Les contrôleurs exposent les points d'entrée REST pour interagir avec l'applic
 - [StatisticsRestController](src/main/java/comptoirs/rest/StatisticsRestController.java): Fournit des statistiques sur les médicaments par catégorie.
 - [SimpleRestController](src/main/java/comptoirs/rest/SimpleRestController.java): Fournit des endpoints simples pour interroger les catégories, médicaments et dispensaires.
 - une [API de télechargement d'images](doc/API_UPLOAD_IMAGE.md) est fournie pour renseigner les images des médicaments
-- L'application esn configurée pour permettres l'[accès Cross-Origin (CORS)](doc/CORS_CONFIGURATION.md) depuis n'importe quelle origine.
+- L'application esn configurée pour permettre l'[accès Cross-Origin (CORS)](doc/CORS_CONFIGURATION.md) depuis n'importe quelle origine.
 
 #### Contrôleurs MVC
 - [StatsMVCController](src/main/java/comptoirs/mvc/StatsMVCController.java): Fournit des vues HTML avec Thymeleaf pour les statistiques.
