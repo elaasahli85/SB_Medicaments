@@ -1,24 +1,23 @@
 # Spring Boot Application - Gestion Pharmaceutique
 
 ## Description
-Ce projet est une application Spring Boot permettant la gestion des médicaments et des commandes pour des dispensaires. Elle utilise des entités JPA pour interagir avec une base de données, des services REST exposés via des contrôleurs, et des dépôts pour accéder aux données.
+Ce projet est une application Spring Boot destinée à une pharmacie centrale qui permet à des dispensaires de commander des médicaments. L'API fournie comprends la gestion des médicaments et des commandes pour les dispensaires. Elle utilise des entités JPA pour interagir avec une base de données, des services REST exposés via des contrôleurs, et des dépôts pour accéder aux données.
 
 ## Fonctionnalités
 - Gestion des médicaments, dispensaires, commandes et catégories de médicaments.
 - Suivi des statistiques de commandes par catégorie de médicaments.
 - Exposition des données via des services REST en JSON et XML.
 - Utilisation de Spring Data JPA pour accéder et manipuler les données.
-- Images de médicaments avec URLs provenant d'Unsplash.
 
-## Technologies Utilisées
-- **Java 21 LTS**
-- **Spring Boot 3.5.3**
-- **Spring Data JPA** avec Hibernate 6.6.18
-- **Jakarta EE** (Jakarta Persistence API 3.1.0)
-- **Lombok 1.18.42**
-- **SpringDoc OpenAPI 2.7.0** pour la documentation API
-- **H2 Database 2.3.232** (développement)
-- **PostgreSQL 42.7.7** (production)
+## Modèles de données
+
+Le *modèle conceptuel de données* (UML/JPA) est le suivant :
+
+![Modèle conceptuel de données](./doc/modele_conceptuel.svg)
+
+Spring Data JPA va générer automatiquement le *modèle logique de données* (relationnel) suivant, conformément aux annotations des classes-entités :
+
+![Modèle logique de données](./doc/modele_logique.png)
 
 ## Structure du Code
 ### Couche "Accès aux données"
@@ -53,12 +52,24 @@ Les contrôleurs exposent les points d'entrée REST pour interagir avec l'applic
 - [CommandeController](src/main/java/comptoirs/rest/CommandeController.java): Fournit une API web permettant l'accès au service métier [CommandeService](src/main/java/comptoirs/service/CommandeService.java).
 - [StatisticsRestController](src/main/java/comptoirs/rest/StatisticsRestController.java): Fournit des statistiques sur les médicaments par catégorie.
 - [SimpleRestController](src/main/java/comptoirs/rest/SimpleRestController.java): Fournit des endpoints simples pour interroger les catégories, médicaments et dispensaires.
+- une [API de télechargement d'images](doc/API_UPLOAD_IMAGE.md) est fournie pour renseigner les images des médicaments
+- L'application esn configurée pour permettres l'[accès Cross-Origin (CORS)](doc/CORS_CONFIGURATION.md) depuis n'importe quelle origine.
 
 #### Contrôleurs MVC
 - [StatsMVCController](src/main/java/comptoirs/mvc/StatsMVCController.java): Fournit des vues HTML avec Thymeleaf pour les statistiques.
 
 #### Documentation API
 L'application expose sa documentation OpenAPI/Swagger à l'adresse : `http://localhost:8989/swagger-ui.html`
+
+## Technologies Utilisées
+- **Java 21 LTS**
+- **Spring Boot 3.5.3**
+- **Spring Data JPA** avec Hibernate 6.6.18
+- **Jakarta EE** (Jakarta Persistence API 3.1.0)
+- **Lombok 1.18.42**
+- **SpringDoc OpenAPI 2.7.0** pour la documentation API
+- **H2 Database 2.3.232** (développement)
+- **PostgreSQL 42.7.7** (production)
 
 ## Démarrage de l'application
 
@@ -68,7 +79,7 @@ L'application expose sa documentation OpenAPI/Swagger à l'adresse : `http://loc
 
 ### Lancer l'application
 ```bash
-mvn spring-boot:run
+mvn clean spring-boot:run
 ```
 
 L'application démarre sur le port **8989** : `http://localhost:8989`

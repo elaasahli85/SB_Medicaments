@@ -121,7 +121,7 @@ Le client offre une interface moderne avec :
 
 Les images sont stockées dans :
 ```
-src/main/resources/static/images/
+/tmp/images/
 ```
 
 **Format du nom de fichier :**
