@@ -9,8 +9,8 @@ package "pharmacie.entity" {
   }
 
   class Medicament {
-   + Long id <<id>>
-     + String nom <<id>>
+   + Long reference <<id>>
+     + String nom
      + BigDecimal prix
      + Integer unitesEnStock
      + Integer unitesCommandees

@@ -13,7 +13,7 @@ Ce projet est une application Spring Boot destinée à une pharmacie centrale qu
 
 Le *modèle conceptuel de données* (UML/JPA) est le suivant :
 
-![Modèle conceptuel de données](./doc/modele_conceptuel.svg)
+![Modèle conceptuel de données](./doc/uml.svg)
 
 Spring Data JPA va générer automatiquement le *modèle logique de données* (relationnel) suivant, conformément aux annotations des classes-entités :
 
