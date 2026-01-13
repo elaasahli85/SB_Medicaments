@@ -15,9 +15,9 @@ Spring Data JPA va générer automatiquement le *modèle logique de données* (r
 
 ## Enoncé du TP
 A partir de ce point de départ :
-- Complétez la mise en oeuvre du modèle conceptuel de données en rajoutant les entités nécessaires (paquetage [entity](src/main/java/pharmacie/entity/)). Rajoutez des contraintes d'intégrité pertinentes sur les propriétés des entités en utilisant les [annotations de validation JPA](https://www.baeldung.com/java-validation)].
+- Complétez la mise en oeuvre du modèle conceptuel de données en rajoutant les entités nécessaires (paquetage [entity](src/main/java/pharmacie/entity/)). Rajoutez des contraintes d'intégrité pertinentes sur les propriétés des entités en utilisant les [annotations de validation JPA](https://www.baeldung.com/java-validation).
 - Ajoutez les dépôts (Repository)  nécessaires (paquetage [dao](src/main/java/pharmacie/dao/)). Complétez les interfaces en ajoutant une méthode permettant de trouver toutes les commandes saisies après une date donnée, et une méthode permettant de trouver tous les dispensaires dans une région donnée, cf. [Extension des interfaces de dépôts](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html).
-- Ajoutez des enregistremnts dans chaque table en complétant le fichier [data.sql](src/main/resources/data.sql).
+- Ajoutez des enregistrements dans chaque table en complétant le fichier [data.sql](src/main/resources/data.sql).
 - Testez les méthodes de dépôts en complétant le fichier [RepositoryCustomMethodsTest.java](src/test/java/pharmacie/dao/RepositoryCustomMethodsTest.java).
 
 
@@ -54,7 +54,7 @@ Les dépôts gèrent l'accès aux entités via Spring Data JPA.
 mvn clean spring-boot:run
 ```
 
-L'application démarre sur le port **8989** : `http://localhost:8080`
+L'application démarre sur le port **8080**  : `http://localhost:8080`
 
 
 ### Données de test
