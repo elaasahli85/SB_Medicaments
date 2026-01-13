@@ -1,55 +1,24 @@
 package pharmacie.dao;
 
+
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import pharmacie.entity.Medicament;
 
 // Cette interface sera auto-implémentée par Spring
-
 public interface MedicamentRepository extends JpaRepository<Medicament, Integer> {
     /**
-     * Calcule le nombre d'unités vendues pour chaque médicament d'une catégorie donnée.
-     *
-     * @param codeCategorie la catégorie à traiter
-     * @return le nombre d'unités vendus pour chaque médicament,
-     * sous la forme d'une liste de DTO UnitesParMedicament
+     * Trouve un médicament à partir de son nom (unique dans Medicament)
+     * @return un médicament "optionnel"
      */
-    @Query("""
-        SELECT m.nom as nom, SUM(li.quantite) AS unites
-        FROM Categorie c
-        JOIN c.medicaments m
-        JOIN m.lignes li
-        WHERE c.code = :codeCategorie
-        GROUP BY m.nom
-    """)
-    List<UnitesParMedicament> medicamentsCommandesPour(Integer codeCategorie);
+    Optional<Medicament>findByNom(String nom);
 
     /**
-     * Calcule le nombre d'unités vendues pour chaque médicament d'une catégorie donnée.
-     * pas d'utilisation de DTO
-     *
-     * @param codeCategorie la catégorie à traiter
-     * @return le nombre d'unités vendus pour chaque médicament,
-     * sous la forme d'une liste de tableaux de valeurs non typées
+     * Trouve les médicaments disponibles (indisponible = false)
+     * @return la liste des médicaments disponibles
      */
-    @Query("""
-        SELECT m.nom, SUM(li.quantite)
-        FROM Categorie c
-        JOIN c.medicaments m
-        JOIN m.lignes li
-        WHERE c.code = :codeCategorie
-        GROUP BY m.nom
-    """)
-    List<Object> medicamentsCommandesPourV2(Integer codeCategorie);
-
-    @Query("""
-       SELECT m from Medicament m
-       WHERE m.indisponible = false
-       AND m.unitesEnStock > m.unitesCommandees
-     """)
-    List<Medicament> medicamentsDisponibles();
-
+    List<Medicament> findByIndisponibleFalse();
 }

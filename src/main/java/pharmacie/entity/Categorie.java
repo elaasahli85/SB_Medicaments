@@ -3,7 +3,6 @@ package pharmacie.entity;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -31,8 +30,6 @@ public class Categorie {
 	@ToString.Exclude
 	// CascadeType.ALL signifie que toutes les opérations CRUD sur la catégorie sont également appliquées à ses médicaments
 	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "categorie")
-	// pour éviter la boucle infinie si on convertit la catégorie en JSON
-	@JsonIgnoreProperties({"categorie", "lignes"})
 	private List<Medicament> medicaments = new LinkedList<>();
 
 }

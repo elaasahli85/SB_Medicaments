@@ -1,14 +1,10 @@
 package pharmacie.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.LinkedList;
-import java.util.List;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
@@ -66,13 +62,7 @@ public class Medicament {
 	@ManyToOne(optional = false)
 	@NonNull
 	@ToString.Exclude
-	@JsonIgnoreProperties("medicaments") // pour éviter la boucle infinie si on convertit le médicament en JSON
+
 	private Categorie categorie ;
-
-	@ToString.Exclude
-	@JsonIgnore // On n'inclut pas les lignes quand on convertit le médicament en JSON
-	@OneToMany(mappedBy = "medicament", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-	private List<Ligne> lignes = new LinkedList<>();
-
 
 }
