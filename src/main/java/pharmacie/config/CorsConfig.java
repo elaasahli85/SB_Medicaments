@@ -2,6 +2,7 @@ package pharmacie.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -20,7 +21,7 @@ public class CorsConfig implements WebMvcConfigurer {
      * Cette configuration s'applique à tous les contrôleurs REST
      */
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
+    public void addCorsMappings(@NonNull CorsRegistry registry) {
         registry.addMapping("/**") // Tous les endpoints
                 .allowedOriginPatterns("*") // Toutes les origines (avec credentials possible)
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD") // Toutes les méthodes HTTP

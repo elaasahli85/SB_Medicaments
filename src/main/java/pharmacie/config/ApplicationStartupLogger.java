@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class ApplicationStartupLogger implements ApplicationListener<WebServerInitializedEvent> {
+    @SuppressWarnings("null")
     @Override
     public void onApplicationEvent(@NonNull WebServerInitializedEvent event) {
         int serverPort = event.getWebServer().getPort();

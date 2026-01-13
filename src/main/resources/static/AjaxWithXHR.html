@@ -3,6 +3,8 @@
 	<head>
 		<title>Ajax avec XHR</title>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script>
 			function doRequest() {
 				// Attention à la compatibilité avec les vieux navigateurs
@@ -36,11 +38,14 @@
 		</script>        
 	</head>
 	<body>
-		<h1>AJAX avec XHR</h1>
+		<div class="container">
+			<a href="index.html" class="back-link">← Retour à l'accueil</a>
+			<h1>AJAX avec XHR</h1>
 		<button type="button" onclick="doRequest()">Exécuter la requête AJAX</button><br>
 		<h2>Le texte apparait ci-dessous</h2>
 		<pre id="demo"></pre>
 		<hr>
-		<a href="./">Retour au menu</a>				
+		<a href="./">Retour au menu</a>
+		</div>
 	</body>
 </html>

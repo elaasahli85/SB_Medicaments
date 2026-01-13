@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import lombok.*;
@@ -20,6 +21,7 @@ public class Categorie {
 	@NonNull
 	@Size(min = 1, max = 255)
 	@Column(unique=true, length = 255)
+	@NotBlank // pour éviter les libellés vides
 	private String libelle;
 
 	@Size(max = 255)
@@ -27,7 +29,9 @@ public class Categorie {
 	private String description;
 
 	@ToString.Exclude
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "categorie")
+	// CascadeType.ALL signifie que toutes les opérations CRUD sur la catégorie sont également appliquées à ses médicaments
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "categorie")
+	// pour éviter la boucle infinie si on convertit la catégorie en JSON
 	@JsonIgnoreProperties({"categorie", "lignes"})
 	private List<Medicament> medicaments = new LinkedList<>();
 

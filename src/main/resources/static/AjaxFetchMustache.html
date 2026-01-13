@@ -4,6 +4,7 @@
 <head>
     <title>Ajax avec l'API fetch et Mustache</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
    <!-- On charge le moteur de template mustache https://mustache.github.io/ -->
@@ -36,7 +37,10 @@
 </head>
 
 <body>
-    <button onclick="doRequest()">Exécuter la requête AJAX</button><br>
+    <div class="container">
+        <a href="index.html" class="back-link">← Retour à l'accueil</a>
+        <h1>Ajax avec l'API fetch et Mustache</h1>
+        <button onclick="doRequest()">Exécuter la requête AJAX</button><br>
 
     <div id="tableCategories">...Le résultat va apparaître ici...</div>
     <hr>
@@ -60,6 +64,7 @@
             {{/_embedded.categories}}
             </TABLE>
         </script>
+    </div>
 </body>
 
 </html>

@@ -17,6 +17,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import org.springframework.lang.NonNull;
 
 @RestController
 @RequestMapping(path = "/api/upload")
@@ -41,7 +42,7 @@ public class ImageUploadController {
      */
     @PostMapping("/{reference}/image")
     public ResponseEntity<Map<String, Object>> uploadImage(
-            @PathVariable Integer reference,
+            @PathVariable @NonNull Integer reference,
             @RequestParam("file") MultipartFile file) {
 
         Map<String, Object> response = new HashMap<>();
@@ -130,7 +131,7 @@ public class ImageUploadController {
      * @return ResponseEntity avec les informations du médicament
      */
     @GetMapping("/{reference}")
-    public ResponseEntity<Map<String, Object>> getMedicament(@PathVariable Integer reference) {
+    public ResponseEntity<Map<String, Object>> getMedicament(@PathVariable @NonNull Integer reference) {
         Map<String, Object> response = new HashMap<>();
 
         try {

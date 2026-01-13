@@ -3,6 +3,8 @@
 	<head>
 		<title>Ajax avec JQuery</title>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<!-- On charge la bibliothèque JQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script>
@@ -46,7 +48,9 @@
 		</script>
 	</head>
 	<body>
-		<h1>AJAX / JQuery / Requête longue</h1>
+		<div class="container">
+			<a href="index.html" class="back-link">← Retour à l'accueil</a>
+			<h1>AJAX / JQuery / Requête longue</h1>
 		<button id="doAjax">Exécuter la requête AJAX</button><br>
 		<img id="waiting" src="images/ajax-loader2.gif" alt="Waiting...">
 		<textarea id="demo" rows="3" cols="40">Le résultat apparaîtra ici</textarea>

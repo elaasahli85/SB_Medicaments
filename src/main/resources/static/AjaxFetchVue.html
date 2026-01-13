@@ -3,6 +3,7 @@
   <head>
     <title>Ajax avec l'API fetch et Vue.js</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
     <!-- On charge la bibliothèque Vue.js -->
@@ -10,7 +11,10 @@
   </head>
 
   <body>
-    <div id="app">
+    <div class="container">
+      <a href="index.html" class="back-link">← Retour à l'accueil</a>
+      <h1>Ajax avec l'API fetch et Vue.js</h1>
+      <div id="app">
       <button v-on:click="doAjax">Exécuter la requête AJAX</button><br />
       <div v-if="! categories">...Le résultat va apparaître ici...</div>
       <div v-if="categories">
@@ -62,5 +66,6 @@
       };
       Vue.createApp(HelloVueApp).mount("#app");
     </script>
+    </div>
   </body>
 </html>

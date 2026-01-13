@@ -4,6 +4,7 @@
 <head>
     <title>Ajax avec l'API fetch et Mustache</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
     <!-- On charge le moteur de template mustache https://mustache.github.io/ -->
@@ -121,8 +122,11 @@
 </head>
 
 <body>
-    <!-- Le formulaire de saisie -->
-    <form id="formulaire">
+    <div class="container">
+        <a href="index.html" class="back-link">← Retour à l'accueil</a>
+        <h1>Exemple POST et DELETE</h1>
+        <!-- Le formulaire de saisie -->
+        <form id="formulaire">
         <label for="libelle">Libellé</label>
         <input name="libelle" placeholder="Libellé de la catégorie"><br>
         <label for="description">Description</label>
@@ -153,6 +157,7 @@
         {{/_embedded.categories}}
         </TABLE>
     </script>
+    </div>
 </body>
 
 </html>
