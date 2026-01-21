@@ -1,4 +1,4 @@
-package pharmacie.Repository;
+package pharmacie.dao;
 
 import pharmacie.entity.Commande;
 import pharmacie.entity.Dispensaire;

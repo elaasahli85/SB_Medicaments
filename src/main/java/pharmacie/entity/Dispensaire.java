@@ -27,6 +27,7 @@ public class Dispensaire {
     private String pays;
     private String codeP;
 
-    @OneToMany(mappedBy = "Dispensaire", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "dispensaire") // ⚠️ doit correspondre à l'attribut dans Commande
     private List<Commande> commandes;
 }

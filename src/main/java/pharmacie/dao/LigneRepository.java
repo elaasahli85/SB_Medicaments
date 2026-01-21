@@ -1,4 +1,4 @@
-package pharmacie.Repository;
+package pharmacie.dao;
 
 import pharmacie.entity.ligne;
 import org.springframework.data.jpa.repository.JpaRepository;

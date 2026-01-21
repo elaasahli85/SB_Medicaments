@@ -39,10 +39,9 @@ public class Commande {
     private String pays;
 
     private String codePostal;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "dispensaire_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Dispensaire dispensaire;
+    @ManyToOne
+    @JoinColumn(name = "dispensaire_id")
+    private Dispensaire dispensaire; // ⚠️ le nom exact ici !
 
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ligne> lignes;

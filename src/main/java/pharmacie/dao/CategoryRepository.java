@@ -1,4 +1,4 @@
-package pharmacie.Repository;
+package pharmacie.dao;
 
 
 import pharmacie.entity.Categorie;
@@ -21,4 +21,6 @@ public interface CategoryRepository extends JpaRepository<Categorie, Long> {
     // Vérifier si une catégorie a des médicaments
     @Query("SELECT COUNT(m) > 0 FROM Medicament m WHERE m.categorie.code = :id")
     boolean hasMedicaments(@Param("code") Long code);
+    Categorie findByLibelle(String libelle);
+    List<Categorie> findByLibelleContaining(String libellePart);
 }
